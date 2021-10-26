@@ -52,6 +52,9 @@ public class PersonaServiceImp implements IPersonaService{
 				throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 			}
 		}
+		else {
+			
+		}
 		
 		return personaRepository.create(oPersona);
 	}
