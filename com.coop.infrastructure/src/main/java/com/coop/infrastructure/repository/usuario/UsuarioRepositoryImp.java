@@ -82,7 +82,7 @@ public class UsuarioRepositoryImp implements IUsuarioRepository{
 		oSql.from("USUARIO U");
 		oSql.from("LEFT JOIN PERSONA PE ON U.ID_PERSONA = PE.ID_PERSONA");
 		oSql.from("LEFT JOIN PERFIL PF ON U.ID_PERFIL = PF.ID_PERFIL");
-		oSql.from("ORDER BY U.ID_USUARIO ASC");
+//		oSql.from("GROUP BY U.ID_USUARIO ORDER BY U.ID_USUARIO");
 		
 		mapResponse = dbUtil.findAll(oSql, pageNumber, pageSize);
 		

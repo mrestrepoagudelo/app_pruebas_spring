@@ -1,0 +1,3 @@
+INSERT INTO perfil (ID_PERFIL, NOMBRE_PERFIL) VALUES (1,'USUARIO'),(2,'ADMIN');
+INSERT INTO persona (ID_PERSONA, NOMBRES, PRIMER_APELLIDO, SEGUNDO_APELLIDO, NUMERO_IDENTIFICACION, ID_TIPO_IDENTIFICACION, EMAIL) VALUES (1,'Carlos','ApellidoA','ApellidoB',1234567,1,'correa@gmail.com'),(2,'Mauricio','ApellidoC','ApellidoD',1234567,2,'correa@gmail.com'),(3,'Monica','Restrepo','Agudelo',1026146005,1,NULL),(4,'Alberto','Restrepo','Pineda',1234565,2,'alber@gmail.com');
+INSERT INTO usuario (USER_NAME, CLAVE, ID_PERSONA, ID_PERFIL, ACTIVO) VALUES ('user1','12345',1,1,'S'),('user2','12345',2,2,'S'),('user3','12345',3,2,'S');

@@ -3,7 +3,9 @@ package com.coop.application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -37,16 +39,24 @@ public class PruebaApplication extends SpringBootServletInitializer{
 			.cors(Customizer.withDefaults())
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/login").permitAll().and()
+			.authorizeRequests().antMatchers("/h2-console/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.httpBasic();
+			http.headers().frameOptions().disable();
 		}
 		
 //		@Override
-//	    public void configure(WebSecurity web) throws Exception {
-//	        web.ignoring().antMatchers("/**");
-//	    }
+//		protected void configure(HttpSecurity http) throws Exception {
+//			 http.headers().frameOptions().disable();
+//		     http.authorizeRequests().antMatchers("/h2-/**").permitAll();
+//		}
+		
+//		@Override
+//		public void configure(WebSecurity web) throws Exception {
+//			web.ignoring().antMatchers("/**");
+//		}
 	}
 
 }
