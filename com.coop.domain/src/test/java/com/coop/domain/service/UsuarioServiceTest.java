@@ -1,6 +1,7 @@
 package com.coop.domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -20,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.coop.domain.constants.MsgConstant;
 import com.coop.domain.entities.Usuario;
+import com.coop.domain.exception.ModelException;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -37,7 +39,6 @@ class UsuarioServiceTest {
 	@BeforeEach
 	public void inicializaMocks() {
 		MockitoAnnotations.initMocks(this);
-		
 		oUsuario = new Usuario();
 		oUsuario.setUserName("UserTest");
 		oUsuario.setClave("PassTest");
@@ -49,7 +50,6 @@ class UsuarioServiceTest {
 	@Test
 	void testFindAll() {
 		Map<String,Object> mapResponse = new HashMap<>();
-
 		when(usuarioRepository.findAll(1,10)).thenReturn(mapResponse);
 		Map<String, Object> mapListaUsuario = usuarioService.findAll(1,10);
 		assertEquals(mapListaUsuario,mapResponse);
@@ -60,7 +60,6 @@ class UsuarioServiceTest {
 	@Test
 	void testFindAllFilters() {
 		Map<String,Object> mapResponse = new HashMap<>();
-
 		when(usuarioRepository.findAllFilters(new HashMap<String,String>(),1,10)).thenReturn(mapResponse);
 		Map<String, Object> mapListaUsuario = usuarioService.findAllFilters(new HashMap<String,String>(),1,10);
 		assertEquals(mapListaUsuario,mapResponse);
@@ -77,11 +76,8 @@ class UsuarioServiceTest {
 	@Test
 	void testFindByIdUserNoExist() {
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		try {
-			usuarioService.findById(oUsuario.getIdUsuario());
-		} catch (Exception e) {
-			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
-		}
+		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.findById(oUsuario.getIdUsuario()));
+		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 	}
 
 	@Test
@@ -97,12 +93,8 @@ class UsuarioServiceTest {
 	void testUpdate() {
 		oUsuario.setIdUsuario(1L);
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		
-		try {
-			usuarioService.create(oUsuario);
-		} catch (Exception e) {
-			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
-		}
+		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.create(oUsuario));
+		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 	}
 
 	@Test
@@ -115,10 +107,7 @@ class UsuarioServiceTest {
 	@Test
 	void testDeleteUserNoExist() {
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		try {
-			usuarioService.delete(oUsuario.getIdUsuario());
-		} catch (Exception e) {
-			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
-		} 
+		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.delete(oUsuario.getIdUsuario()));
+		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 	}
 }
