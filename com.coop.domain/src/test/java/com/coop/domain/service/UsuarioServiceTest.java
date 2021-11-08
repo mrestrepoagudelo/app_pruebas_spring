@@ -12,70 +12,113 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.coop.domain.constants.MsgConstant;
 import com.coop.domain.entities.Usuario;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
-import com.coop.domain.interfaces.usuario.IUsuarioService;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension.class)
 class UsuarioServiceTest {
 	
 	@InjectMocks
-	private IUsuarioService suarioService;
+	UsuarioServiceImp usuarioService;
 	
 	@Mock
 	IUsuarioRepository usuarioRepository;
 	
+	private Usuario oUsuario;
+	
 	@BeforeEach
-	void inicializaMocks() {
+	public void inicializaMocks() {
 		MockitoAnnotations.initMocks(this);
 		
-		Usuario oUsuario = new Usuario();
-		oUsuario.setUserName("x");
-		oUsuario.setClave("12345678");
+		oUsuario = new Usuario();
+		oUsuario.setUserName("UserTest");
+		oUsuario.setClave("PassTest");
 		oUsuario.setIdPersona(1L);
 		oUsuario.setIdPerfil(2L);
 		oUsuario.setActivo("N");
-		
-		suarioService.create(oUsuario);
 	}
 	
 	@Test
-	void testCreate() {
-		Usuario oUsuario = new Usuario();
-		oUsuario.setUserName("x");
-		oUsuario.setClave("12345678");
-		oUsuario.setIdPersona(1L);
-		oUsuario.setIdPerfil(2L);
-		oUsuario.setActivo("N");
-		
-//		boolean esInsertar = oUsuario.getIdUsuario() == null;
-		
-		//Actualizar
-//		if(!esInsertar) {
-//			Usuario oUsuarioDB = usuarioRepository.findById(oUsuario.getIdUsuario());
-//			if(oUsuarioDB == null) {
-//				throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
-//			}
-//		}
-		
-//		Usuario o = usuarioRepository.create(oUsuario);
-//		when(usuarioRepository.findById(1L)).thenReturn(oUsuario);
-        
-//		Usuario oUsuarioDb = usuarioRepository.findById(1L);
-		Map<String,Object> map = usuarioRepository.findAll(1,1);
-		System.out.println(map);
-//	    Assertions.assertEquals(oUsuarioDb.getIdUsuario(),1L);
-		assertEquals(10, 10);
-	}
-//
-//	@Test
-//	void testDelete() {
-//		fail("Not yet implemented");
-//	}
+	void testFindAll() {
+		Map<String,Object> mapResponse = new HashMap<>();
 
+		when(usuarioRepository.findAll(1,10)).thenReturn(mapResponse);
+		Map<String, Object> mapListaUsuario = usuarioService.findAll(1,10);
+		assertEquals(mapListaUsuario,mapResponse);
+		verify(usuarioRepository).findAll(1, 10);
+	}
+	
+	
+	@Test
+	void testFindAllFilters() {
+		Map<String,Object> mapResponse = new HashMap<>();
+
+		when(usuarioRepository.findAllFilters(new HashMap<String,String>(),1,10)).thenReturn(mapResponse);
+		Map<String, Object> mapListaUsuario = usuarioService.findAllFilters(new HashMap<String,String>(),1,10);
+		assertEquals(mapListaUsuario,mapResponse);
+		verify(usuarioRepository).findAllFilters(new HashMap<String,String>(),1, 10);
+	}
+	
+	@Test
+	void testFindById() {
+		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(oUsuario);
+		Usuario returned = usuarioService.findById(oUsuario.getIdUsuario());
+		assertEquals(returned,oUsuario);
+	}
+	
+	@Test
+	void testFindByIdUserNoExist() {
+		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
+		try {
+			usuarioService.findById(oUsuario.getIdUsuario());
+		} catch (Exception e) {
+			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
+		}
+	}
+
+	@Test
+	void testCreate() {
+		oUsuario.setIdUsuario(null);
+		when(usuarioRepository.create(any(Usuario.class))).thenReturn(oUsuario);
+		Usuario created = usuarioService.create(oUsuario);
+		assertEquals(created.getUserName(),oUsuario.getUserName());
+		verify(usuarioRepository, times(1)).create(any(Usuario.class));
+	}
+	
+	@Test
+	void testUpdate() {
+		oUsuario.setIdUsuario(1L);
+		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
+		
+		try {
+			usuarioService.create(oUsuario);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
+		}
+	}
+
+	@Test
+	void testDelete() {
+		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(oUsuario);
+		usuarioService.delete(oUsuario.getIdUsuario());
+		verify(usuarioRepository,times(1)).delete(oUsuario.getIdUsuario());
+	}
+	
+	@Test
+	void testDeleteUserNoExist() {
+		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
+		try {
+			usuarioService.delete(oUsuario.getIdUsuario());
+		} catch (Exception e) {
+			assertEquals(e.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
+		} 
+	}
 }

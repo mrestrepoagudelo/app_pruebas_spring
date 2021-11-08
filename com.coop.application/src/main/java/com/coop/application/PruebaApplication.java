@@ -48,12 +48,6 @@ public class PruebaApplication extends SpringBootServletInitializer{
 		}
 		
 //		@Override
-//		protected void configure(HttpSecurity http) throws Exception {
-//			 http.headers().frameOptions().disable();
-//		     http.authorizeRequests().antMatchers("/h2-/**").permitAll();
-//		}
-		
-//		@Override
 //		public void configure(WebSecurity web) throws Exception {
 //			web.ignoring().antMatchers("/**");
 //		}

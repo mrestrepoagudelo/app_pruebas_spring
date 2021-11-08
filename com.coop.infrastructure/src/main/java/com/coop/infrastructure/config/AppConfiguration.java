@@ -8,10 +8,8 @@ import com.coop.domain.interfaces.persona.IPersonaService;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadRepository;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadService;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
-import com.coop.domain.interfaces.usuario.IUsuarioService;
 import com.coop.domain.service.PersonaServiceImp;
 import com.coop.domain.service.RecursoSeguridadServiceImp;
-import com.coop.domain.service.UsuarioServiceImp;
 import com.coop.infrastructure.repository.persona.IPersonaJpaRepository;
 import com.coop.infrastructure.repository.persona.PersonaRepositoryImp;
 import com.coop.infrastructure.repository.recursoSeguridad.IRecursoSeguridadJpaRepository;
@@ -49,11 +47,6 @@ public class AppConfiguration {
 		return new PersonaRepositoryImp(personaJpaRepository);
 	}
 	
-	@Bean
-	public IUsuarioService usuarioService(IUsuarioRepository usuarioRepository) {
-		return new UsuarioServiceImp(usuarioRepository);
-	}
-
 	@Bean
 	public IUsuarioRepository usuarioRepository(IUsuarioJpaRepository usuarioJpaRepository) {
 		return new UsuarioRepositoryImp(usuarioJpaRepository);
