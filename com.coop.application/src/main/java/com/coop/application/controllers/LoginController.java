@@ -49,7 +49,7 @@ public class LoginController {
 		
 		UsuarioEntity oUsuario = validarLogin(mapLogin);
 		Map<String,Object> mapResponse = new HashMap<String, Object>();
-		String token = getJWTToken(oUsuario.getUserName());
+		String token = getJWTToken(oUsuario);
 		
 		mapResponse.put("usuario", oUsuario);
 		mapResponse.put("token", token);
@@ -87,11 +87,7 @@ public class LoginController {
 		return mapResponse;
 	}
 	
-	public static void main(String[] args) {
-		
-	}
-	
-	private String getJWTToken(String username) {
+	private String getJWTToken(UsuarioEntity oUsuario) {
 		String secretKey = "mySecretKey";
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 				.commaSeparatedStringToAuthorityList("ROLE_USER");
@@ -99,11 +95,13 @@ public class LoginController {
 		String token = Jwts
 				.builder()
 				.setId("softtekJWT")
-				.setSubject(username)
+				.setSubject(oUsuario.getUserName())
 				.claim("authorities",
 						grantedAuthorities.stream()
 								.map(GrantedAuthority::getAuthority)
 								.collect(Collectors.toList()))
+				.claim("idUsuario", oUsuario.getIdUsuario())
+				.claim("idPerfil", oUsuario.getIdPerfil())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 3600000))
 				.signWith(SignatureAlgorithm.HS512,

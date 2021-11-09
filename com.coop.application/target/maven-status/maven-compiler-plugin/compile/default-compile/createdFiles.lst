@@ -1,11 +1,11 @@
 com\coop\application\exception\ErrorMessage.class
 com\coop\application\PruebaApplication.class
 com\coop\application\controllers\PersonaController.class
-com\coop\application\PruebaApplication$WebSecurityConfig.class
 com\coop\application\security\JWTAuthorizationFilter.class
 com\coop\application\controllers\LoginController.class
 com\coop\application\constants\Mapping.class
 com\coop\application\controllers\PermisosMenuPerfilController.class
 com\coop\application\controllers\PerfilController.class
 com\coop\application\exception\ExceptionConfig.class
+com\coop\application\security\WebSecurityConfig.class
 com\coop\application\controllers\UsuarioController.class
