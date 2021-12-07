@@ -30,8 +30,8 @@ public class Mapping {
 	public static final String URL_FIND_ALL_FILTERS_PERFIL = URL_PATH + "perfil/findAllFilters/{pageNumber}/{pageSize}";
 	public static final String URL_RESOURCES_VIEW_PERFIL = URL_PATH + "perfil/getResourcesView/{resource}";
 	
-	public static final String URL_CREATE_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfilController/create";
-	public static final String URL_FIND_ALL_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfilController/findAll/{pageNumber}/{pageSize}";
-	public static final String URL_FIND_ALL_FILTERS_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfilController/findAllFilters/{pageNumber}/{pageSize}";
-	public static final String URL_RESOURCES_VIEW_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfilController/getResourcesView/{resource}";
+	public static final String URL_CREATE_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfil/create";
+	public static final String URL_FIND_ALL_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfil/findAll/{pageNumber}/{pageSize}";
+	public static final String URL_FIND_ALL_FILTERS_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfil/findAllFilters/{pageNumber}/{pageSize}";
+	public static final String URL_RESOURCES_VIEW_PERFIL_RECURSO_SEGURIDAD = URL_PATH + "permisosMenuPerfil/getResourcesView/{resource}";
 }

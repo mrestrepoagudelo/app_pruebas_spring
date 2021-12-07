@@ -46,14 +46,12 @@ public class LoginController {
 	
 	@PostMapping(Mapping.URL_LOGIN)
 	public ResponseEntity<Map<String,Object>> login(@RequestBody Map<String,String> mapLogin) {
-		
 		UsuarioEntity oUsuario = validarLogin(mapLogin);
 		Map<String,Object> mapResponse = new HashMap<String, Object>();
 		String token = getJWTToken(oUsuario);
 		
 		mapResponse.put("usuario", oUsuario);
 		mapResponse.put("token", token);
-		mapResponse.put("permisos", getPermisos(oUsuario.getIdPerfil()));
 		
 		return ResponseEntity.status(HttpStatus.OK).body(mapResponse);
 	}
@@ -70,21 +68,6 @@ public class LoginController {
 			throw new ModelException(MsgConstant.MSG_USUARIO_NO_ACTIVADO);
 		}
 		return oUsuario;
-	}
-	
-	private Map<String,Object> getPermisos(Long idPerfil) {
-		PerfilEntity oPerfil = perfilRepository.findById(idPerfil).orElse(null);
-		
-		if(oPerfil.getNombrePerfil().equalsIgnoreCase("ADMON")) {
-			Map<String,Object> mapResponse = new HashMap<String, Object>();
-			mapResponse.put("list","allPrivileges");
-			return mapResponse;
-		}
-		
-		Map<String,String> mapFilters = new HashMap<String, String>();
-		mapFilters.put("idPerfil", idPerfil.toString());
-		Map<String,Object> mapResponse = perfilRecursoSeguridadService.findAllFilters(mapFilters, null, null);	
-		return mapResponse;
 	}
 	
 	private String getJWTToken(UsuarioEntity oUsuario) {
