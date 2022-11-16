@@ -23,6 +23,7 @@ public class DBUtil {
 	@Autowired
 	private EntityManager em;
 	
+	@SuppressWarnings("unchecked")
 	public Map<String,Object> findAll(SQL oSql, int pageNumber, int pageSize) throws InternalErrorException{
 		List<Map<String,Object>> listaRetorno = new ArrayList<Map<String,Object>>();
 		Query query;
@@ -32,7 +33,7 @@ public class DBUtil {
 			query.setFirstResult((pageNumber) * pageSize); 
 			query.setMaxResults(pageSize);
 		    
-	        NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl) query;
+			NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl<Map<String, Object>>) query;
 	        nativeQuery.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 	        List<Map<String,Object>> results = nativeQuery.getResultList();
 	       
@@ -65,6 +66,7 @@ public class DBUtil {
 		return mapResponse;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Map<String,Object> findAll(SQL oSql, Object[] parametros, Integer pageNumber, Integer pageSize) throws InternalErrorException {
 		List<Map<String,Object>> listaRetorno = new ArrayList<Map<String,Object>>();
 		Query query;
@@ -83,7 +85,7 @@ public class DBUtil {
 				}
 			}
 			
-			NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl) query;
+			NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl<Map<String, Object>>) query;
 			nativeQuery.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> results = nativeQuery.getResultList();
 			
@@ -121,6 +123,7 @@ public class DBUtil {
 		return mapResponse;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> genericSearch(String sql, Object[] parametros) throws InternalErrorException {
 		List<Map<String,Object>> listaRetorno = new ArrayList<Map<String,Object>>();
 		Query query;
@@ -134,7 +137,7 @@ public class DBUtil {
 				}
 			}
 			
-			NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl) query;
+			NativeQueryImpl<Map<String, Object>> nativeQuery = (NativeQueryImpl<Map<String, Object>>) query;
 			nativeQuery.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 			List<Map<String,Object>> results = nativeQuery.getResultList();
 			

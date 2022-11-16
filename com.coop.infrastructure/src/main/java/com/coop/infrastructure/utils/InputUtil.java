@@ -70,6 +70,7 @@ public class InputUtil {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Long getLong(String sTmp) {
 		return (sTmp==null || sTmp.length()==0)?null:new Long(sTmp.trim());
 	}
@@ -81,6 +82,7 @@ public class InputUtil {
 		return actual;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Long getLong(String sTmp,boolean obligatorio) throws ModelException {
 		if (sTmp==null || sTmp.length()==0)
 			throw new ModelException("Atributo obligatorio");
@@ -88,6 +90,7 @@ public class InputUtil {
 			return new Long(sTmp.trim());
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Integer getInteger(String sTmp) {
 		return (sTmp==null || sTmp.length()==0)?null:new Integer(sTmp.trim());
 	}
@@ -114,7 +117,7 @@ public class InputUtil {
 		return "S".equalsIgnoreCase(value)?"S":"N";
 	}
 
-	public static Object getValorTipoDato(Class tipoDato,String valor) throws InternalErrorException {
+	public static Object getValorTipoDato(Class<?> tipoDato,String valor) throws InternalErrorException {
 		
 		if(tipoDato.equals(BigDecimal.class)){
 			return getBigDecimal(valor);

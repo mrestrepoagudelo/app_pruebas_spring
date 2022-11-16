@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    command: --character-set-server=utf8mb4 --explicit_defaults_for_timestamp=1 --lower_case_table_names=1
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: socrates
+        MYSQL_DATABASE: db_pruebas
+        MYSQL_USER: magudelo2
+        MYSQL_PASSWORD: socrates2
+    networks:
+        - web
+    ports:
+      - '3306:3306'
+    volumes:
+      - ~/Documentos/volumes-mysql/sql-app-test:/var/lib/mysql
+      - ../scripts_sql/db_pruebas.sql:/docker-entrypoint-initdb.d/db_pruebas.sql
+# Docker Networks
+networks:
+  web:
+    driver: bridge
+# Docker Volumes
+volumes:
+  dbdata: {}

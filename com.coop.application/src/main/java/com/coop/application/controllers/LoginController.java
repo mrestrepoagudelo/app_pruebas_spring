@@ -1,6 +1,5 @@
 package com.coop.application.controllers;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coop.application.constants.Mapping;
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Perfil;
 import com.coop.domain.exception.ModelException;
-import com.coop.domain.interfaces.perfil.IPerfilRepository;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadService;
-import com.coop.infrastructure.entities.PerfilEntity;
 import com.coop.infrastructure.entities.UsuarioEntity;
 import com.coop.infrastructure.repository.perfil.IPerfilJpaRepository;
 import com.coop.infrastructure.repository.usuario.IUsuarioJpaRepository;

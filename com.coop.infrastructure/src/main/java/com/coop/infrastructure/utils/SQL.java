@@ -11,7 +11,7 @@ public class SQL {
 	private StringBuffer sbResto = new StringBuffer();
 	private List<String> listaWhere = new ArrayList<String>();
 	private List<String> listProperties = new ArrayList<String>();
-	List listaParametros = new ArrayList();
+	List<Object> listaParametros = new ArrayList<Object>();
 
 	public void select(String sql) {
 		if(sbSelect.length() == 0){
@@ -30,7 +30,7 @@ public class SQL {
 		listaWhere.add(sql);
 	}
 	
-	public void where(String sql, String parametro, Class tipo) throws InternalErrorException{
+	public void where(String sql, String parametro, @SuppressWarnings("rawtypes") Class tipo) throws InternalErrorException{
 		if(!InputUtil.esVacio(parametro)){
 			listaWhere.add(sql);
 			String param = getOperator(sql, parametro);
