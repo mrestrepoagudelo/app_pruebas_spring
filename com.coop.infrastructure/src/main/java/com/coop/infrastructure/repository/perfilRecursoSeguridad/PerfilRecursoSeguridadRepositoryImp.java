@@ -109,4 +109,27 @@ public class PerfilRecursoSeguridadRepositoryImp implements IPerfilRecursoSeguri
 		
 		return mapResponse;
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String,Object> findRecursosByPerfil(Long idPerfil){ 
+		SQL oSql = new SQL();
+		oSql.select("P.ID_PERFIL_RECURSO_SEGURIDAD");
+		oSql.select("P.ID_PERFIL");
+		oSql.select("P.ID_RECURSO_SEGURIDAD");
+		oSql.select("P1.NOMBRE_PERFIL");
+		oSql.select("R2.NOMBRE_RECURSO");
+		oSql.select("R2.CONTROL");
+
+		oSql.from("PERFIL_RECURSO_SEGURIDAD P");
+		oSql.from("LEFT JOIN PERFIL P1 ON P.ID_PERFIL = P1.ID_PERFIL");
+		oSql.from("LEFT JOIN RECURSO_SEGURIDAD R2 ON P.ID_RECURSO_SEGURIDAD = R2.ID_RECURSO_SEGURIDAD");
+
+		oSql.where("P.ID_PERFIL = ?", idPerfil.toString(), Long.class);
+		
+		Map<String,Object> mapResponse = new HashMap<>();
+		mapResponse = dbUtil.findAll(oSql, oSql.getParametros(), null, null);
+		
+		return mapResponse;
+	}
 }

@@ -21,7 +21,6 @@ import com.coop.domain.constants.MsgConstant;
 import com.coop.domain.exception.ModelException;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadService;
 import com.coop.infrastructure.entities.UsuarioEntity;
-import com.coop.infrastructure.repository.perfil.IPerfilJpaRepository;
 import com.coop.infrastructure.repository.usuario.IUsuarioJpaRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -37,9 +36,6 @@ public class LoginController {
 	@Autowired
 	private IPerfilRecursoSeguridadService perfilRecursoSeguridadService;
 	
-	@Autowired
-	private IPerfilJpaRepository perfilRepository;
-	
 	@PostMapping(Mapping.URL_LOGIN)
 	public ResponseEntity<Map<String,Object>> login(@RequestBody Map<String,String> mapLogin) {
 		UsuarioEntity oUsuario = validarLogin(mapLogin);
@@ -48,6 +44,7 @@ public class LoginController {
 		
 		mapResponse.put("usuario", oUsuario);
 		mapResponse.put("token", token);
+		mapResponse.put("recursosMenu", getRecursosByPerfil(oUsuario.getIdPerfil()));
 		
 		return ResponseEntity.status(HttpStatus.OK).body(mapResponse);
 	}
@@ -64,6 +61,10 @@ public class LoginController {
 			throw new ModelException(MsgConstant.MSG_USUARIO_NO_ACTIVADO);
 		}
 		return oUsuario;
+	}
+	
+	private Map<String, Object> getRecursosByPerfil(Long idPerfil) {
+		return perfilRecursoSeguridadService.findRecursosByPerfil(idPerfil);
 	}
 	
 	private String getJWTToken(UsuarioEntity oUsuario) {

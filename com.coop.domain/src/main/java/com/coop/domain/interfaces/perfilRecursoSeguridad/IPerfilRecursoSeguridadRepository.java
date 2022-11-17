@@ -11,4 +11,5 @@ public interface IPerfilRecursoSeguridadRepository {
 	public PerfilRecursoSeguridad findByIdPerfilAndIdRecursoSeguridad(Long idPerfil, Long idRecursoSeguridad); 
 	public PerfilRecursoSeguridad create(PerfilRecursoSeguridad oPerfilRecursoSeguridad);
 	public void delete(Long id);
+	public Map<String,Object> findRecursosByPerfil(Long idPerfil);
 }

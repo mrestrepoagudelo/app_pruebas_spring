@@ -9,4 +9,5 @@ public interface IPerfilRecursoSeguridadService {
 	public PerfilRecursoSeguridad findById(Long id);
 	public Map<String,Object> create(Map<String,Object> mapParametros);
 	public void delete(Long id);
+	public Map<String,Object> findRecursosByPerfil(Long idPerfil);
 }

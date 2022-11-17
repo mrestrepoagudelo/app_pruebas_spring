@@ -46,6 +46,12 @@ public class PerfilRecursoSeguridadServiceImp implements IPerfilRecursoSeguridad
 		}
 		return oPerfilRecursoSeguridad;
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String,Object> findRecursosByPerfil(Long idPerfil){
+		return perfilRecursoSeguridadRepository.findRecursosByPerfil(idPerfil);
+	} 
 
 	@Override
 	@Transactional
