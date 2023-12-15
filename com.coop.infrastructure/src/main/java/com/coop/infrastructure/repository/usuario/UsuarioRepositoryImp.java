@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coop.domain.entities.Usuario;
+import com.coop.domain.dto.Usuario;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
-import com.coop.infrastructure.entities.UsuarioEntity;
+import com.coop.infrastructure.entity.UsuarioEntity;
 import com.coop.infrastructure.utils.DBUtil;
 import com.coop.infrastructure.utils.SQL;
 

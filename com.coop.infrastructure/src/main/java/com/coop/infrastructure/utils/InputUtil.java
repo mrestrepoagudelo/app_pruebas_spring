@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.coop.domain.exception.InternalErrorException;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.exception.ModelExceptionDos;
 
 public class InputUtil {
 
@@ -83,9 +83,9 @@ public class InputUtil {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static Long getLong(String sTmp,boolean obligatorio) throws ModelException {
+	public static Long getLong(String sTmp,boolean obligatorio) throws ModelExceptionDos {
 		if (sTmp==null || sTmp.length()==0)
-			throw new ModelException("Atributo obligatorio");
+			throw new ModelExceptionDos("Atributo obligatorio");
 		else
 			return new Long(sTmp.trim());
 	}

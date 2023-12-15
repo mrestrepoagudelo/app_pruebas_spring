@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Usuario;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.dto.Usuario;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
 import com.coop.domain.interfaces.usuario.IUsuarioService;
 
@@ -35,7 +35,7 @@ public class UsuarioServiceImp implements IUsuarioService{
 	public Usuario findById(Long id) {
 		Usuario oUsuario = usuarioRepository.findById(id);
 		if(oUsuario == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 		}
 		return oUsuario;
 	}
@@ -49,7 +49,7 @@ public class UsuarioServiceImp implements IUsuarioService{
 		if(!esInsertar) {
 			Usuario oUsuarioDB = usuarioRepository.findById(oUsuario.getIdUsuario());
 			if(oUsuarioDB == null) {
-				throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
+				throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 			}
 		}
 		
@@ -61,7 +61,7 @@ public class UsuarioServiceImp implements IUsuarioService{
 	public void delete(Long id) {
 		Usuario oUsuario = usuarioRepository.findById(id);
 		if(oUsuario == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 		}
 		usuarioRepository.delete(id);
 	}

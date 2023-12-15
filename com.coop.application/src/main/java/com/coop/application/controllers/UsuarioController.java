@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coop.application.constants.Mapping;
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Usuario;
+import com.coop.domain.dto.Usuario;
 import com.coop.domain.interfaces.usuario.IUsuarioService;
 import com.coop.infrastructure.repository.resources_view.IResourcesView;
 

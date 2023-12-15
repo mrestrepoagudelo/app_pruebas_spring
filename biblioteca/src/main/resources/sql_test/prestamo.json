@@ -1,0 +1,7 @@
+{
+    "idPrestamo": "2",
+    "idUsuario": "2",
+    "idLibro":"2",
+    "fechaPrestamo":"2023-10-04",
+    "fechaMaximaDevolucion": "2023-10-20"
+}

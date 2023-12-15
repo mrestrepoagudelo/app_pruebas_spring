@@ -1,7 +1,8 @@
 package com.coop.infrastructure.repository.persona;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.coop.infrastructure.entities.PersonaEntity;
+
+import com.coop.infrastructure.entity.PersonaEntity;
 
 public interface IPersonaJpaRepository extends JpaRepository<PersonaEntity, Long>{
 	

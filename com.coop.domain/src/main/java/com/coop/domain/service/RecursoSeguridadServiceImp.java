@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.RecursoSeguridad;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.dto.RecursoSeguridad;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadRepository;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadService;
 
@@ -35,7 +35,7 @@ public class RecursoSeguridadServiceImp implements IRecursoSeguridadService{
 	public RecursoSeguridad findById(Long id) {
 		RecursoSeguridad oRecursoSeguridad = recursoSeguridadRepository.findById(id);
 		if(oRecursoSeguridad == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 		}
 		return oRecursoSeguridad;
 	}
@@ -49,7 +49,7 @@ public class RecursoSeguridadServiceImp implements IRecursoSeguridadService{
 		if(!esInsertar) {
 			RecursoSeguridad oRecursoSeguridadDB = recursoSeguridadRepository.findById(oRecursoSeguridad.getIdRecursoSeguridad());
 			if(oRecursoSeguridadDB == null) {
-				throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
+				throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 			}
 		}
 		
@@ -61,7 +61,7 @@ public class RecursoSeguridadServiceImp implements IRecursoSeguridadService{
 	public void delete(Long id) {
 		RecursoSeguridad oRecursoSeguridad = recursoSeguridadRepository.findById(id);
 		if(oRecursoSeguridad == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 		}
 		recursoSeguridadRepository.delete(id);
 	}

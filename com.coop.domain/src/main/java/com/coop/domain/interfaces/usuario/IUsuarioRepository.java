@@ -2,7 +2,7 @@ package com.coop.domain.interfaces.usuario;
 
 import java.util.Map;
 
-import com.coop.domain.entities.Usuario;
+import com.coop.domain.dto.Usuario;
 
 public interface IUsuarioRepository {
 	public Map<String,Object> findAll(int pageNumber,int pageSize);

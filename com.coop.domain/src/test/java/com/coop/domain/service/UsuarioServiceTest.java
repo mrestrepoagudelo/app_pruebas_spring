@@ -20,8 +20,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Usuario;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.dto.Usuario;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.usuario.IUsuarioRepository;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -76,7 +76,7 @@ class UsuarioServiceTest {
 	@Test
 	void testFindByIdUserNoExist() {
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.findById(oUsuario.getIdUsuario()));
+		ModelExceptionDos exception = assertThrows(ModelExceptionDos.class, () -> usuarioService.findById(oUsuario.getIdUsuario()));
 		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 	}
 
@@ -93,7 +93,7 @@ class UsuarioServiceTest {
 	void testUpdate() {
 		oUsuario.setIdUsuario(1L);
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.create(oUsuario));
+		ModelExceptionDos exception = assertThrows(ModelExceptionDos.class, () -> usuarioService.create(oUsuario));
 		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 	}
 
@@ -107,7 +107,7 @@ class UsuarioServiceTest {
 	@Test
 	void testDeleteUserNoExist() {
 		when(usuarioRepository.findById(oUsuario.getIdUsuario())).thenReturn(null);
-		ModelException exception = assertThrows(ModelException.class, () -> usuarioService.delete(oUsuario.getIdUsuario()));
+		ModelExceptionDos exception = assertThrows(ModelExceptionDos.class, () -> usuarioService.delete(oUsuario.getIdUsuario()));
 		assertEquals(exception.getMessage(),MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 	}
 }

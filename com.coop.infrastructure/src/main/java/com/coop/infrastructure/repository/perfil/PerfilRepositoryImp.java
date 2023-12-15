@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coop.domain.entities.Perfil;
+import com.coop.domain.dto.Perfil;
 import com.coop.domain.interfaces.perfil.IPerfilRepository;
-import com.coop.infrastructure.entities.PerfilEntity;
+import com.coop.infrastructure.entity.PerfilEntity;
 import com.coop.infrastructure.utils.DBUtil;
 import com.coop.infrastructure.utils.SQL;
 

@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coop.domain.entities.Persona;
+import com.coop.domain.dto.Persona;
 import com.coop.domain.interfaces.persona.IPersonaRepository;
-import com.coop.infrastructure.entities.PersonaEntity;
+import com.coop.infrastructure.entity.PersonaEntity;
 import com.coop.infrastructure.utils.DBUtil;
 import com.coop.infrastructure.utils.SQL;
 

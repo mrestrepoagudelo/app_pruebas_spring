@@ -1,7 +1,8 @@
 package com.coop.domain.interfaces.persona;
 
 import java.util.Map;
-import com.coop.domain.entities.Persona;
+
+import com.coop.domain.dto.Persona;
 
 public interface IPersonaService {
 	public Map<String,Object> findAll(int pageNumber, int pageSize);

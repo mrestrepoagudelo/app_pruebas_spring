@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coop.application.constants.Mapping;
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Perfil;
+import com.coop.domain.dto.Perfil;
 import com.coop.domain.interfaces.perfil.IPerfilService;
 
 @CrossOrigin("*")

@@ -1,7 +1,8 @@
 package com.coop.domain.interfaces.perfil;
 
 import java.util.Map;
-import com.coop.domain.entities.Perfil;
+
+import com.coop.domain.dto.Perfil;
 
 public interface IPerfilService {
 	public Map<String,Object> findAll(int pageNumber, int pageSize);

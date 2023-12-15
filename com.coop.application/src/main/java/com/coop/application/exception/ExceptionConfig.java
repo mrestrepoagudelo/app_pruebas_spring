@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.coop.domain.exception.InternalErrorException;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.exception.ModelExceptionDos;
 
 @ControllerAdvice
 public class ExceptionConfig {
 	
-	@ExceptionHandler(ModelException.class)
-	public ResponseEntity<Object> modelException(ModelException e){
+	@ExceptionHandler(ModelExceptionDos.class)
+	public ResponseEntity<Object> modelException(ModelExceptionDos e){
 		ErrorMessage errorMessage = new ErrorMessage(
 			e.getMessage(), 
 			HttpStatus.BAD_REQUEST, 

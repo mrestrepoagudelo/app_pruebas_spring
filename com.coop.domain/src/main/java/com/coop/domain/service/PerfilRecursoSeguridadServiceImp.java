@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.PerfilRecursoSeguridad;
-import com.coop.domain.entities.RecursoSeguridad;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.dto.PerfilRecursoSeguridad;
+import com.coop.domain.dto.RecursoSeguridad;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadRepository;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadService;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadRepository;
@@ -42,7 +42,7 @@ public class PerfilRecursoSeguridadServiceImp implements IPerfilRecursoSeguridad
 	public PerfilRecursoSeguridad findById(Long id) {
 		PerfilRecursoSeguridad oPerfilRecursoSeguridad = perfilRecursoSeguridadRepository.findById(id);
 		if(oPerfilRecursoSeguridad == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 		}
 		return oPerfilRecursoSeguridad;
 	}
@@ -108,7 +108,7 @@ public class PerfilRecursoSeguridadServiceImp implements IPerfilRecursoSeguridad
 	public void delete(Long id) {
 		PerfilRecursoSeguridad oPerfilRecursoSeguridad = perfilRecursoSeguridadRepository.findById(id);
 		if(oPerfilRecursoSeguridad == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 		}
 		perfilRecursoSeguridadRepository.delete(id);
 	}

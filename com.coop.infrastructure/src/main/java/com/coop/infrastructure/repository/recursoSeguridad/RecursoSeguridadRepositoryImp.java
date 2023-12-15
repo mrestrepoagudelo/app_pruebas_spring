@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coop.domain.entities.RecursoSeguridad;
+import com.coop.domain.dto.RecursoSeguridad;
 import com.coop.domain.interfaces.recursoSeguridad.IRecursoSeguridadRepository;
-import com.coop.infrastructure.entities.RecursoSeguridadEntity;
+import com.coop.infrastructure.entity.RecursoSeguridadEntity;
 import com.coop.infrastructure.utils.DBUtil;
 import com.coop.infrastructure.utils.SQL;
 

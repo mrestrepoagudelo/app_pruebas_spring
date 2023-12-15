@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coop.application.constants.Mapping;
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadService;
-import com.coop.infrastructure.entities.UsuarioEntity;
+import com.coop.infrastructure.entity.UsuarioEntity;
 import com.coop.infrastructure.repository.usuario.IUsuarioJpaRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -55,10 +55,10 @@ public class LoginController {
 		
 		UsuarioEntity oUsuario = usuarioRepository.findByUserNameAndClave(userName,clave);
 		if(oUsuario == null) {
-			 throw new ModelException(MsgConstant.MSG_USUARIO_NO_ENCONTRADO);
+			 throw new ModelExceptionDos(MsgConstant.MSG_USUARIO_NO_ENCONTRADO);
 		}
 		else if (oUsuario.getActivo().equalsIgnoreCase("N")){
-			throw new ModelException(MsgConstant.MSG_USUARIO_NO_ACTIVADO);
+			throw new ModelExceptionDos(MsgConstant.MSG_USUARIO_NO_ACTIVADO);
 		}
 		return oUsuario;
 	}

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coop.application.constants.Mapping;
-import com.coop.domain.entities.PerfilRecursoSeguridad;
+import com.coop.domain.dto.PerfilRecursoSeguridad;
 import com.coop.domain.interfaces.perfilRecursoSeguridad.IPerfilRecursoSeguridadService;
 import com.coop.infrastructure.repository.resources_view.IResourcesView;
 

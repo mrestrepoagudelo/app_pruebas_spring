@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.coop.application.exception.ErrorMessage;
-import com.coop.domain.exception.ModelException;
-import com.coop.infrastructure.entities.PerfilEntity;
-import com.coop.infrastructure.entities.PerfilRecursoSeguridadEntity;
-import com.coop.infrastructure.entities.RecursoSeguridadEntity;
+import com.coop.domain.exception.ModelExceptionDos;
+import com.coop.infrastructure.entity.PerfilEntity;
+import com.coop.infrastructure.entity.PerfilRecursoSeguridadEntity;
+import com.coop.infrastructure.entity.RecursoSeguridadEntity;
 import com.coop.infrastructure.repository.perfil.IPerfilJpaRepository;
 import com.coop.infrastructure.repository.perfilRecursoSeguridad.IPerfilRecursoSeguridadJpaRepository;
 import com.coop.infrastructure.repository.recursoSeguridad.IRecursoSeguridadJpaRepository;
@@ -74,7 +74,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			restResponseBytes(error, response);
 			return;
 		}
-		catch (ModelException e) {
+		catch (ModelExceptionDos e) {
 			ErrorMessage error = new ErrorMessage(e.getMessage(),HttpStatus.UNAUTHORIZED,null);
 			restResponseBytes(error, response);
             return;
@@ -124,7 +124,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		}
 		
 		if(oRecursoSeguridadEntity == null) {
-			throw new ModelException("No tienes permisos sobre ese recurso!");
+			throw new ModelExceptionDos("No tienes permisos sobre ese recurso!");
 		}
 	}
 	

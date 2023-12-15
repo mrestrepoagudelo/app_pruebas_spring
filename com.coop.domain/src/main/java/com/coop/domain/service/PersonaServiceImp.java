@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coop.domain.constants.MsgConstant;
-import com.coop.domain.entities.Persona;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.dto.Persona;
+import com.coop.domain.exception.ModelExceptionDos;
 import com.coop.domain.interfaces.persona.IPersonaRepository;
 import com.coop.domain.interfaces.persona.IPersonaService;
 
@@ -35,7 +35,7 @@ public class PersonaServiceImp implements IPersonaService{
 	public Persona findById(Long id) {
 		Persona oPersona = personaRepository.findById(id);
 		if(oPersona == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO);
 		}
 		return oPersona;
 	}
@@ -45,15 +45,11 @@ public class PersonaServiceImp implements IPersonaService{
 	public Persona create(Persona oPersona) {
 		boolean esInsertar = oPersona.getIdPersona() == null;
 		
-		//Actualizar
 		if(!esInsertar) {
 			Persona oPersonaDB = personaRepository.findById(oPersona.getIdPersona());
 			if(oPersonaDB == null) {
-				throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
+				throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_UPDATE);
 			}
-		}
-		else {
-			
 		}
 		
 		return personaRepository.create(oPersona);
@@ -64,7 +60,7 @@ public class PersonaServiceImp implements IPersonaService{
 	public void delete(Long id) {
 		Persona oPersona = personaRepository.findById(id);
 		if(oPersona == null) {
-			throw new ModelException(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
+			throw new ModelExceptionDos(MsgConstant.MSG_REGISTRO_NO_ENCONTRADO_DELETE);
 		}
 		personaRepository.delete(id);
 	}

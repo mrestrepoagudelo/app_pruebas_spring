@@ -1,7 +1,8 @@
 package com.coop.domain.interfaces.perfilRecursoSeguridad;
 
 import java.util.Map;
-import com.coop.domain.entities.PerfilRecursoSeguridad;
+
+import com.coop.domain.dto.PerfilRecursoSeguridad;
 
 public interface IPerfilRecursoSeguridadService {
 	public Map<String,Object> findAll(int pageNumber, int pageSize);

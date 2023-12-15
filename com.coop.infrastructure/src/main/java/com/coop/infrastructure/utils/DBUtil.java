@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.coop.domain.exception.InternalErrorException;
-import com.coop.domain.exception.ModelException;
+import com.coop.domain.exception.ModelExceptionDos;
 
 @Component
 public class DBUtil {
@@ -102,7 +102,7 @@ public class DBUtil {
 			}
 			
 		}
-		catch (ModelException e) {
+		catch (ModelExceptionDos e) {
 			throw new InternalErrorException(e);
 		}
 		
@@ -154,7 +154,7 @@ public class DBUtil {
 			}
 			
 		}
-		catch (ModelException e) {
+		catch (ModelExceptionDos e) {
 			throw new InternalErrorException(e);
 		}
 		

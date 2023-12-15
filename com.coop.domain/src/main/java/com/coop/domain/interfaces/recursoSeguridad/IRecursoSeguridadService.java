@@ -1,7 +1,8 @@
 package com.coop.domain.interfaces.recursoSeguridad;
 
 import java.util.Map;
-import com.coop.domain.entities.RecursoSeguridad;
+
+import com.coop.domain.dto.RecursoSeguridad;
 
 public interface IRecursoSeguridadService {
 	public Map<String,Object> findAll(int pageNumber, int pageSize);
